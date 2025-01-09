@@ -39,14 +39,52 @@ const RecipeCreator = () => {
       i === index ? { ...step, ...updates } : step
     ));
   };
+
+  const exportRecipe = () => {
+    const recipe = {
+      name: recipeName,
+      createdAt: new Date().toISOString(),
+      steps: steps
+    };
+
+    const blob = new Blob([JSON.stringify(recipe, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    // download json
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${recipeName || 'recipe'}.json`;
+    document.body.appendChild(link);
+    link.click();
+    
+    // cleaning
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 }
+
+const handleFileUpload = (event) => {
+};
 
 function App() {
   return (
-    <div className="container mx-auto py-8">
-      <h1>
-      Welocome to Recipe Creation App
-      </h1>
+    <div className="max-w-4xl mx-auto p-4 space-y-4">
+        <Card>
+          <CardHeader>
+            <CardTitle>Recipe Creator</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <input
+                type="text"
+                value={recipeName}
+                onChange={(e) => setRecipeName(e.target.value)}
+                placeholder="Recipe Name"
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            </CardContent>
+            </Card>
     </div>
   );
 }
