@@ -40,55 +40,6 @@ const RecipeCreator = () => {
     ));
   };
 
-  const exportRecipe = () => {
-    const recipe = {
-      name: recipeName,
-      createdAt: new Date().toISOString(),
-      steps: steps
-    };
-
-    const blob = new Blob([JSON.stringify(recipe, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    
-    // download json
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${recipeName || 'recipe'}.json`;
-    document.body.appendChild(link);
-    link.click();
-    
-    // cleaning
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-}
-
-const handleFileUpload = (event) => {
-  const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          try {
-            const recipe = JSON.parse(e.target.result);
-            
-            // Validate structure 
-            if (!recipe.steps || !Array.isArray(recipe.steps)) {
-              throw new Error('Invalid recipe format');
-            }
-            
-            setRecipeName(recipe.name || '');
-            setSteps(recipe.steps.map(step => ({
-              ...step,
-              id: step.id || crypto.randomUUID() // ID for every step
-            })));
-          } catch (error) {
-            alert('Error loading recipe file: ' + error.message);
-          }
-        };
-        reader.readAsText(file);
-      }
-};
-
 function App() {
   return (
     <div className="max-w-4xl mx-auto p-4 space-y-4">
