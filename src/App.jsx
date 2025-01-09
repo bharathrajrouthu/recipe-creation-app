@@ -234,10 +234,48 @@ function App() {
                 </div>
               ))}
             </div>
-            </CardContent>
-            </Card>
+  
+            <div className="flex gap-2">
+              <button
+                onClick={() => addStep('image')}
+                className="flex items-center gap-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                + Add Image Step
+              </button>
+              <button
+                onClick={() => addStep('unscrew')}
+                className="flex items-center gap-2 p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                + Add Unscrew Step
+              </button>
             </div>
+          </CardContent>
+          <CardFooter className="flex gap-2">
+            <button
+              onClick={exportRecipe}
+              className="flex items-center gap-2 p-2 bg-green-500 text-white rounded hover:bg-green-600"
+            >
+              Export Recipe 💾
+            </button>
+            
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileUpload}
+              accept=".json"
+              style={{ display: 'none' }}
+            />
+            
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center gap-2 p-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+            >
+              Import Recipe 📥 
+            </button>
+          </CardFooter>
+        </Card>
+      </div>
   );
-}
+};
 
 export default App;
