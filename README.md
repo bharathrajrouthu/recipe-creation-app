@@ -1,8 +1,10 @@
-# React + Vite
+# Recipe Creator Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend application for creating, managing, and exporting recipes.
 
-Currently, two official plugins are available:
+It involves
+- Take Image (with dynamic options like coordinates).
+- Unscrewing (automatic or specific with coordinates).
+- Export recipes as JSON.
+- Recreate recipes from JSON input.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
